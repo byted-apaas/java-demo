@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/apaas")
-public class TestController1 {
+public class TestController {
 
     @RequestMapping("/test1")
     @ResponseBody
