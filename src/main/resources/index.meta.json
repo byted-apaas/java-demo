@@ -1,0 +1,104 @@
+[
+    {
+        "output": [],
+        "input": [],
+        "apiName": "method1",
+        "longTaskMode": false,
+        "relativePath": "/method1",
+        "frontendSDKInvokable": false,
+        "description": {
+            "en_US": "",
+            "zh_CN": ""
+        },
+        "label": {
+            "en_US": "method1",
+            "zh_CN": "method1"
+        },
+        "apiId": "method1"
+    },
+    {
+        "output": [],
+        "input": [],
+        "apiName": "apaas_test1",
+        "longTaskMode": false,
+        "relativePath": "/apaas/test1",
+        "frontendSDKInvokable": false,
+        "description": {
+            "en_US": "",
+            "zh_CN": ""
+        },
+        "label": {
+            "en_US": "apaas_test1",
+            "zh_CN": "apaas_test1"
+        },
+        "apiId": "apaas_test1"
+    },
+    {
+        "output": [],
+        "input": [],
+        "apiName": "apaas_test2",
+        "longTaskMode": false,
+        "relativePath": "/apaas/test2",
+        "frontendSDKInvokable": false,
+        "description": {
+            "en_US": "",
+            "zh_CN": ""
+        },
+        "label": {
+            "en_US": "apaas_test2",
+            "zh_CN": "apaas_test2"
+        },
+        "apiId": "apaas_test2"
+    },
+    {
+        "output": [
+            {
+                "description": "",
+                "label": "name",
+                "type": "String",
+                "key": "name"
+            },
+            {
+                "description": "",
+                "label": "password",
+                "type": "String",
+                "key": "password"
+            },
+            {
+                "description": "",
+                "label": "rowBody",
+                "type": "String",
+                "key": "rowBody"
+            }
+        ],
+        "input": [
+            {
+                "description": "",
+                "label": "name",
+                "type": "String",
+                "key": "name",
+                "required": true
+            },
+            {
+                "description": "",
+                "label": "password",
+                "type": "String",
+                "key": "password",
+                "required": true
+            }
+        ],
+        "apiName": "method2",
+        "longTaskMode": false,
+        "relativePath": "/method2",
+        "frontendSDKInvokable": false,
+        "description": {
+            "en_US": "",
+            "zh_CN": ""
+        },
+        "label": {
+            "en_US": "method2",
+            "zh_CN": "method2"
+        },
+        "apiId": "method2"
+    }
+]
