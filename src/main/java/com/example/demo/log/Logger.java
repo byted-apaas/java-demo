@@ -14,10 +14,6 @@ public class Logger {
     private String apaasLogSuffix = "apaas-log-suffix";
     private Map<String, String> headers;
 
-    public Logger() {
-
-    }
-
     public Logger(Map<String, String> headers) {
         this.headers = headers;
     }
