@@ -1,8 +1,12 @@
 package com.example.demo.method2;
 
 
+import com.example.demo.log.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.Map;
 
 
 @Controller
@@ -20,7 +24,10 @@ public class Method2Controller {
 
     @PostMapping("/method2")
     @ResponseBody
-    public Result method2(@RequestBody Params params) {
+
+    public Result method2(@RequestBody Params params, @RequestHeader Map<String, String> headers) { //  @RequestLogger Logger logger
+        Logger logger = new Logger(headers);
+        logger.info("%s 函数开始执行", new Date());
         Result res = new Result();
         res.name = params.name;
         res.password = params.password;
