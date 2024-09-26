@@ -3,59 +3,64 @@ package com.example.demo.log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
-import org.slf4j.LoggerFactory;
+import com.example.demo.log.constant.HeaderKey;
+import com.example.demo.log.constant.LogLevel;
 
 import java.util.Date;
 import java.util.Map;
 
 
 public class Logger {
-    private String apaasLogPrefix = "apaas-log-prefix";
-    private String apaasLogSuffix = "apaas-log-suffix";
     private Map<String, String> headers;
 
     public Logger(Map<String, String> headers) {
         this.headers = headers;
     }
 
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(org.slf4j.Logger.class);
+    public void error(String var1, Object... var2) {
+        String message = String.format(var1, var2);
+        printLog(message, LogLevel.Error);
+    }
 
-    public void info(String var1) {
-        logger.info(var1);
+    public void warn(String var1, Object... var2) {
+        String message = String.format(var1, var2);
+        printLog(message, LogLevel.Warn);
     }
 
     public void info(String var1, Object... var2) {
+        String message = String.format(var1, var2);
+        printLog(message, LogLevel.Info);
+    }
+
+    private void printLog(String message, LogLevel logLevel) {
         if (headers == null) {
             return;
         }
 
-        String executeID = headers.get("x-serverless-execute-id");
-        String logID = headers.get("x-kunlun-logid");
-        String functionID = headers.get("x-serverless-function-api-id");
-
-        String tenantStr = headers.get("x-kunlun-tenant");
-        logger.info("tenantStr: {}", tenantStr);
+        String executeID = headers.get(HeaderKey.executeID);
+        String logID = headers.get(HeaderKey.logID);
+        String functionID = headers.get(HeaderKey.functionID);
+        String tenantStr = headers.get(HeaderKey.tenant);
         Tenant tenant = JSON.parseObject(tenantStr, Tenant.class);
         if (tenant == null) {
-            logger.info("null tenant, str: {}", tenantStr);
+            System.out.println(message);
             return;
         }
 
-
         FormatLog formatLog = new FormatLog();
-        formatLog.Level = 6; // info
+        formatLog.Level = logLevel.getLevel();
         formatLog.EventID = executeID;
         formatLog.LogID = logID;
         formatLog.TenantID = tenant.ID;
         formatLog.Namespace = tenant.Namespace;
-        formatLog.Message = String.format(var1, var2);
+        formatLog.Message = message;
         formatLog.Timestamp = new Date().getTime();
         formatLog.TenantType = tenant.Type;
         formatLog.FunctionAPIID = functionID;
 
         String jsonStr = JSONObject.toJSONString(formatLog);
 
-        String content = String.format("%s %s %s %s", "2024-01-01", apaasLogPrefix, jsonStr, apaasLogSuffix);
+        String content = String.format("%s %s %s %s", "2024-01-01", HeaderKey.apaasLogPrefix, jsonStr, HeaderKey.apaasLogSuffix);
         System.out.println(content);
     }
 
