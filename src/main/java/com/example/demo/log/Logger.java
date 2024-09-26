@@ -3,32 +3,36 @@ package com.example.demo.log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.example.demo.log.constant.Common;
 import com.example.demo.log.constant.HeaderKey;
 import com.example.demo.log.constant.LogLevel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
-
+// 注意：修改这个文件的代码会导致应用在 aPaaS 平台上查看不到日志
 public class Logger {
     private Map<String, String> headers;
+    private AtomicInteger logCount = new AtomicInteger(0);
 
     public Logger(Map<String, String> headers) {
         this.headers = headers;
     }
 
-    public void error(String var1, Object... var2) {
-        String message = String.format(var1, var2);
+    public void error(String format, Object... args) {
+        String message = String.format(format, args);
         printLog(message, LogLevel.Error);
     }
 
-    public void warn(String var1, Object... var2) {
-        String message = String.format(var1, var2);
+    public void warn(String format, Object... args) {
+        String message = String.format(format, args);
         printLog(message, LogLevel.Warn);
     }
 
-    public void info(String var1, Object... var2) {
-        String message = String.format(var1, var2);
+    public void info(String format, Object... args) {
+        String message = String.format(format, args);
         printLog(message, LogLevel.Info);
     }
 
@@ -47,6 +51,20 @@ public class Logger {
             return;
         }
 
+        // 丢失超出条数的日志
+        int nextCount = logCount.incrementAndGet();
+        if (nextCount > Common.LogCountLimit) {
+            return;
+        }
+        // 单条日志长度限制，超过则截断并在该日志后增加 Tip
+        if (message.length() >= Common.LogLengthLimit) {
+            message = message.substring(0, Common.LogLengthLimit) + Common.LogLengthLimitTip;
+        }
+        // 整体日志条数限制，超过则截断并在最后一条日志增加 Tip
+        if (nextCount == Common.LogCountLimit) {
+            message = message + Common.LogCountLimitTip;
+        }
+
         FormatLog formatLog = new FormatLog();
         formatLog.Level = logLevel.getLevel();
         formatLog.EventID = executeID;
@@ -60,8 +78,15 @@ public class Logger {
 
         String jsonStr = JSONObject.toJSONString(formatLog);
 
-        String content = String.format("%s %s %s %s", "2024-01-01", HeaderKey.apaasLogPrefix, jsonStr, HeaderKey.apaasLogSuffix);
+        String content = String.format("%s %s %s %s", getFormatTime(), HeaderKey.apaasLogPrefix, jsonStr, HeaderKey.apaasLogSuffix);
         System.out.println(content);
+    }
+
+    private String getFormatTime() {
+        // FaaS 平台通过时间分割日志
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        return sdf.format(now);
     }
 
     private static class Tenant {
