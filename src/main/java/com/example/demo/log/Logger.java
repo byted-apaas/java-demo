@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-// 注意：修改这个文件的代码会导致应用在 aPaaS 平台上查看不到日志
+// 注意：修改这个文件的代码可能会导致应用在 aPaaS 平台上查看不到日志。
 public class Logger {
     private Map<String, String> headers;
     private AtomicInteger logCount = new AtomicInteger(0);
