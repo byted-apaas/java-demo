@@ -35,7 +35,8 @@ public class LoginController {
     @PostMapping("/user/login")
     @ResponseBody
     public Result login(@RequestBody Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
-        logger.info("%s 开始登陆", params.name);
+        logger.info("{} 开始登陆, params: {}, header: {} ", params, params.name, headers);
+        logger.info("测试分隔符: header: {} \n, params: {}", headers);
 
         Result res = new Result();
         res.message = String.format("user: %s, login success.", params.name);

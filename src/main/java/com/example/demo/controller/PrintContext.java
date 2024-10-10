@@ -32,9 +32,9 @@ public class PrintContext {
     @ResponseBody
     public Result PrintInfo(@RequestBody Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
         logger.info("开始打印上下文：");
-        logger.info("Trigger Type: %s",headers.get("x-kunlun-trigger-type"));
-        logger.info("Trigger Info: %s",headers.get("x-apaas-persist-faas-request-source"));
-        logger.info("Context: %s",headers.get("x-kunlun-tenant"));
+        logger.info("Trigger Type: {}",headers.get("x-kunlun-trigger-type"));
+        logger.info("Trigger Info: {}",headers.get("x-apaas-persist-faas-request-source"));
+        logger.info("Context: {}",headers.get("x-kunlun-tenant"));
 
         return new Result();
     }

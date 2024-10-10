@@ -6,6 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.example.demo.log.constant.Common;
 import com.example.demo.log.constant.HeaderKey;
 import com.example.demo.log.constant.LogLevel;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,18 +23,26 @@ public class Logger {
     }
 
     public void error(String format, Object... args) {
-        String message = String.format(format, args);
+        String message = getFormattedMessage(format, args);
         printLog(message, LogLevel.Error);
     }
 
     public void warn(String format, Object... args) {
-        String message = String.format(format, args);
+        String message = getFormattedMessage(format, args);
         printLog(message, LogLevel.Warn);
     }
 
     public void info(String format, Object... args) {
-        String message = String.format(format, args);
+        String message = getFormattedMessage(format, args);
         printLog(message, LogLevel.Info);
+    }
+
+    private String getFormattedMessage(String format, Object... args) {
+        String message = format;
+        if (args != null) {
+            message = MessageFormatter.arrayFormat(format, args).getMessage();
+        }
+        return message;
     }
 
     private void printLog(String message, LogLevel logLevel) {

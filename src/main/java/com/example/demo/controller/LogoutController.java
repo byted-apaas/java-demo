@@ -31,8 +31,7 @@ public class LogoutController {
     @ResponseBody
     public Result logout(@RequestBody LoginController.Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
         // 日志功能
-        headers.get("token");
-        logger.info("%s 退出登陆", params.name);
+        logger.info("{} 退出登陆", params.name);
 
         // 在这里补充业务代码
 
