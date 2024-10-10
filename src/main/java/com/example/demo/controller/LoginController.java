@@ -15,6 +15,11 @@ public class LoginController {
     static class Params {
         public String name;
         public String password;
+
+        @Override
+        public String toString() { // 用于输出格式化日志
+            return String.format("name: %s, password: %s", name, password);
+        }
     }
 
     @JsonFormat
@@ -35,8 +40,7 @@ public class LoginController {
     @PostMapping("/user/login")
     @ResponseBody
     public Result login(@RequestBody Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
-        logger.info("{} 开始登陆, params: {}, header: {} ", params, params.name, headers);
-        logger.info("测试分隔符: header: {} \n, params: {}", headers);
+        logger.info("{} 开始登陆, params: {},\n header: {} ", params.name, params, headers);
 
         Result res = new Result();
         res.message = String.format("user: %s, login success.", params.name);
