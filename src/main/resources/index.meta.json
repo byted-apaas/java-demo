@@ -1,18 +1,49 @@
 [
     {
         "output": [],
-        "input": [],
-        "apiName": "user_logout",
+        "input": [
+            {
+                "description": "",
+                "label": "bPrintEnvVar",
+                "type": "Boolean",
+                "key": "bPrintEnvVar",
+                "required": true
+            },
+            {
+                "description": "",
+                "label": "bPrintContext",
+                "type": "Boolean",
+                "key": "bPrintContext",
+                "required": true
+            }
+        ],
+        "apiName": "print_info",
         "longTaskMode": false,
-        "relativePath": "/user/logout",
-        "frontendSDKInvokable": false,
+        "relativePath": "/printInfo",
+        "frontendSDKInvokable": true,
         "description": {
-            "en_US": "",
-            "zh_CN": ""
+            "en_US": "get context information from header, and print by log",
+            "zh_CN": "从 header 中获取云函数运行的上下文信息，包括：触发函数的上下文、租户信息、应用信息等"
         },
         "label": {
-            "en_US": "user_logout",
-            "zh_CN": "user_logout"
+            "en_US": "print context information",
+            "zh_CN": "打印上下文"
+        }
+    },
+    {
+        "output": [],
+        "input": [],
+        "apiName": "log_out",
+        "longTaskMode": false,
+        "relativePath": "/user/logout",
+        "frontendSDKInvokable": true,
+        "description": {
+            "en_US": "log_out current account",
+            "zh_CN": "从当前登录的账号中退出"
+        },
+        "label": {
+            "en_US": "log_out current account",
+            "zh_CN": "退出登录"
         }
     },
     {
@@ -20,13 +51,13 @@
             {
                 "description": "",
                 "label": "message",
-                "type": "String",
+                "type": "Text",
                 "key": "message"
             },
             {
                 "description": "",
                 "label": "token",
-                "type": "String",
+                "type": "Text",
                 "key": "token"
             }
         ],
@@ -34,29 +65,29 @@
             {
                 "description": "",
                 "label": "name",
-                "type": "String",
+                "type": "Text",
                 "key": "name",
                 "required": true
             },
             {
                 "description": "",
                 "label": "password",
-                "type": "String",
+                "type": "Text",
                 "key": "password",
                 "required": true
             }
         ],
-        "apiName": "user_login",
+        "apiName": "log_in",
         "longTaskMode": false,
         "relativePath": "/user/login",
-        "frontendSDKInvokable": false,
+        "frontendSDKInvokable": true,
         "description": {
-            "en_US": "",
-            "zh_CN": ""
+            "en_US": "log_out an account",
+            "zh_CN": "登录账号"
         },
         "label": {
-            "en_US": "user_login",
-            "zh_CN": "user_login"
+            "en_US": "log in account",
+            "zh_CN": "登录"
         }
     }
 ]

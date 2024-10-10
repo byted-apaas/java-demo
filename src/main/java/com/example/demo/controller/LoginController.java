@@ -23,6 +23,15 @@ public class LoginController {
         public String token;
     }
 
+
+    /**
+     * @apiName {string}    log_in
+     * @labelCN {string}    登录
+     * @labelEN {string}    log in account
+     * @descriptionCN {string}  登录账号
+     * @descriptionEN {string}  log_out an account
+     * @frontendSDKInvokable {bool}   true
+     */
     @PostMapping("/user/login")
     @ResponseBody
     public Result login(@RequestBody Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
