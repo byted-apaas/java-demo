@@ -29,7 +29,7 @@ public class LogoutController {
      */
     @PostMapping("/user/logout")
     @ResponseBody
-    public Result logout(@RequestBody LoginController.Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
+    public Result logout(@RequestBody Params params, @RequestHeader Map<String, String> headers, @RequestLogger Logger logger) {
         // 日志功能
         logger.info("{} 退出登陆", params.name);
 
