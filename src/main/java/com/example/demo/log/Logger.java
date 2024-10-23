@@ -9,6 +9,7 @@ import com.example.demo.log.constant.LogLevel;
 import org.slf4j.helpers.MessageFormatter;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -74,6 +75,10 @@ public class Logger {
             message = message + Common.LogCountLimitTip;
         }
 
+        // 获取当前时间的微秒值
+        long nanos = Instant.now().toEpochMilli() * 1000000 + Instant.now().getNano();
+        long micros = nanos / 1000;
+
         FormatLog formatLog = new FormatLog();
         formatLog.Level = logLevel.getLevel();
         formatLog.EventID = executeID;
@@ -81,7 +86,7 @@ public class Logger {
         formatLog.TenantID = tenant.ID;
         formatLog.Namespace = tenant.Namespace;
         formatLog.Message = message;
-        formatLog.Timestamp = new Date().getTime();
+        formatLog.Timestamp = micros;
         formatLog.TenantType = tenant.Type;
         formatLog.FunctionAPIID = functionID;
 
