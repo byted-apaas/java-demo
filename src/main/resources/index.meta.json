@@ -32,17 +32,32 @@
     },
     {
         "output": [],
-        "input": [],
-        "apiName": "log_out",
+        "input": [
+            {
+                "description": "",
+                "label": "name",
+                "type": "Text",
+                "key": "name",
+                "required": true
+            },
+            {
+                "description": "",
+                "label": "token",
+                "type": "Text",
+                "key": "token",
+                "required": true
+            }
+        ],
+        "apiName": "user_logout",
         "longTaskMode": false,
         "relativePath": "/user/logout",
         "frontendSDKInvokable": true,
         "description": {
-            "en_US": "log_out current account",
+            "en_US": "logout current account",
             "zh_CN": "从当前登录的账号中退出"
         },
         "label": {
-            "en_US": "log_out current account",
+            "en_US": "logout current account",
             "zh_CN": "退出登录"
         }
     },
@@ -77,16 +92,16 @@
                 "required": true
             }
         ],
-        "apiName": "log_in",
+        "apiName": "user_login",
         "longTaskMode": false,
         "relativePath": "/user/login",
         "frontendSDKInvokable": true,
         "description": {
-            "en_US": "log_out an account",
+            "en_US": "login an account",
             "zh_CN": "登录账号"
         },
         "label": {
-            "en_US": "log in account",
+            "en_US": "login account",
             "zh_CN": "登录"
         }
     }

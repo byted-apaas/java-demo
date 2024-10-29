@@ -20,11 +20,11 @@ public class LogoutController {
     }
 
     /**
-     * @apiName {string}    log_out
+     * @apiName {string}    user_logout
      * @labelCN {string}    退出登录
-     * @labelEN {string}    log_out current account
+     * @labelEN {string}    logout current account
      * @descriptionCN {string}  从当前登录的账号中退出
-     * @descriptionEN {string}  log_out current account
+     * @descriptionEN {string}  logout current account
      * @frontendSDKInvokable {bool}   true
      */
     @PostMapping("/user/logout")

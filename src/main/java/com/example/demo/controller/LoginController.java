@@ -30,11 +30,11 @@ public class LoginController {
 
 
     /**
-     * @apiName {string}    log_in
+     * @apiName {string}    user_login
      * @labelCN {string}    登录
-     * @labelEN {string}    log in account
+     * @labelEN {string}    login account
      * @descriptionCN {string}  登录账号
-     * @descriptionEN {string}  log_out an account
+     * @descriptionEN {string}  login an account
      * @frontendSDKInvokable {bool}   true
      */
     @PostMapping("/user/login")
